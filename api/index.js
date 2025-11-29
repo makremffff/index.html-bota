@@ -1,4 +1,4 @@
-// /api/index.js (Modified for Dynamic Tasks and Security)
+// /api/index.js (Final Corrected Version)
 
 /**
  * SHIB Ads WebApp Backend API
@@ -18,16 +18,12 @@ const BOT_TOKEN = process.env.BOT_TOKEN;
 // ------------------------------------------------------------------
 const REWARD_PER_AD = 3;
 const REFERRAL_COMMISSION_RATE = 0.05;
-const DAILY_MAX_ADS = 100; // Max ads limit
+const DAILY_MAX_ADS = 100; // Max ads limit (Correct constant)
 const DAILY_MAX_SPINS = 15; // Max spins limit
 const RESET_INTERVAL_MS = 6 * 60 * 60 * 1000; // ⬅️ 6 hours in milliseconds
 const MIN_TIME_BETWEEN_ACTIONS_MS = 3000; // 3 seconds minimum time between watchAd/spin requests
 const ACTION_ID_EXPIRY_MS = 60000; // 60 seconds for Action ID to be valid
 const SPIN_SECTORS = [5, 10, 15, 20, 5];
-
-// ------------------------------------------------------------------
-// Task Constants (REMOVED: TASK_REWARD and TELEGRAM_CHANNEL_USERNAME)
-// ------------------------------------------------------------------
 
 
 /**
@@ -53,6 +49,7 @@ function sendError(res, message, statusCode = 400) {
 
 async function supabaseFetch(tableName, method, body = null, queryParams = '?select=*') {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    // This is the point where the function may crash if ENV variables are missing
     throw new Error('Supabase environment variables are not configured.');
   }
 
@@ -97,7 +94,6 @@ async function supabaseFetch(tableName, method, body = null, queryParams = '?sel
 
 /**
  * Checks if a user is a member (or creator/admin) of a specific Telegram channel.
- * Extracts username from the task_link.
  */
 async function checkChannelMembership(userId, taskLink) {
     if (!BOT_TOKEN) {
@@ -380,11 +376,10 @@ async function validateAndUseActionId(res, userId, actionId, actionType) {
 }
 
 
-// --- Handler Functions (Existing functions like handleGetUserData, handleRegister, handleWatchAd, etc., are assumed here) ---
-// (Due to brevity, only new/modified core functions are provided in full here, but the module.exports handler includes all.)
+// --- Handler Functions ---
 
 /**
- * 0) type: "requestActionId" (No change)
+ * 0) type: "requestActionId" 
  */
 async function handleRequestActionId(req, res, body) {
     const { user_id, action_type } = body;
@@ -411,8 +406,7 @@ async function handleRequestActionId(req, res, body) {
 }
 
 /**
- * 7) type: "getTasks" ⬅️ NEW
- * Retrieves all active and available tasks for the user.
+ * 7) type: "getTasks"
  */
 async function handleGetTasks(req, res, body) {
     const { user_id } = body;
@@ -439,8 +433,7 @@ async function handleGetTasks(req, res, body) {
 
 
 /**
- * 8) type: "completeTask" ⬅️ MODIFIED for dynamic task list
- * Claims the reward for a specific task.
+ * 8) type: "completeTask"
  */
 async function handleCompleteTask(req, res, body) {
     const { user_id, action_id, task_id } = body;
@@ -519,7 +512,7 @@ async function handleCompleteTask(req, res, body) {
 }
 
 
-// --- Placeholder functions (Assume correct implementation based on previous logic) ---
+// --- Placeholder functions ---
 async function handleGetUserData(req, res, body) {
     const { user_id } = body;
     const id = parseInt(user_id);
@@ -591,6 +584,9 @@ async function handleRegister(req, res, body) {
     }
 }
 
+/**
+ * FIXED: Uses DAILY_MAX_ADS instead of the undefined DAILY_MAX
+ */
 async function handleWatchAd(req, res, body) {
     const { user_id, action_id } = body;
     const id = parseInt(user_id);
@@ -608,8 +604,9 @@ async function handleWatchAd(req, res, body) {
         
         const user = users[0];
 
-        if (user.ads_watched_today >= DAILY_MAX) {
-            return sendError(res, `Daily ad limit reached (${DAILY_MAX}).`, 403);
+        // 🔴 FIX APPLIED HERE
+        if (user.ads_watched_today >= DAILY_MAX_ADS) {
+            return sendError(res, `Daily ad limit reached (${DAILY_MAX_ADS}).`, 403);
         }
 
         const newAdsCount = user.ads_watched_today + 1;
@@ -621,7 +618,8 @@ async function handleWatchAd(req, res, body) {
             last_activity: new Date().toISOString()
         };
         
-        if (newAdsCount >= DAILY_MAX) {
+        // 🔴 FIX APPLIED HERE
+        if (newAdsCount >= DAILY_MAX_ADS) {
             updatePayload.ads_limit_reached_at = new Date().toISOString();
         }
 
