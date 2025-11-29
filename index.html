@@ -361,55 +361,64 @@
             box-shadow:0 5px 0 #4e555b;transition:all .1s ease;
         }
         .back-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #4e555b}
-        .note{margin-top:15px;font-size:13px;color:#777;max-width:400px;text-align:center;background:rgba(255,140,0,0.1);padding:10px;border-radius:10px;border-left: 5px solid #ff8c00;}
 
-        /* Withdrawal History Table */
+        /* Withdrawal History */
         .history-section{
             width: 100%;
             max-width: 400px;
-            margin-top: 30px;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
-            background: rgba(255, 255, 255, 0.9);
+            margin-top: 20px;
             padding: 15px;
+            background: #fff;
             border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,.05);
         }
         .history-title{
             font-size: 20px;
             color: #333;
+            font-weight: bold;
             margin-bottom: 15px;
-            font-weight: 700;
-            text-align: center;
+            border-bottom: 2px dashed #ccc;
+            padding-bottom: 10px;
         }
-        .history-table{
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
+        .history-list{
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
-        .history-table th, .history-table td{
-            padding: 10px;
+        .history-item{
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
             border-bottom: 1px solid #eee;
-            text-align: left;
+            font-size: 14px;
+            color: #444;
         }
-        .history-table th{
-            background-color: #f0f4f8;
-            color: #4a90e2;
-            font-weight: 700;
-        }
-        .history-table tr:last-child td{
+        .history-item:last-child{
             border-bottom: none;
         }
-        .status-pending{color: #ff8c00; font-weight: bold;}
-        .status-completed{color: #28a745; font-weight: bold;}
-        .no-records{text-align: center; color: #999; padding: 20px;}
-        
+        .history-amount{
+            font-weight: bold;
+        }
+        .history-status.pending{
+            color: #ff8c00;
+        }
+        .history-status.completed{
+            color: #28a745;
+            font-weight: bold;
+        }
+        .no-records{
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+
         /* ===== Invite Screen - (No changes needed) ===== */
         .invite-screen{
             display:flex;flex-direction:column;align-items:center;padding:20px 20px;
             transition:opacity .3s ease;
             overflow-y: auto;
         }
-        .invite-header{ 
+        .invite-header{
             text-align: center;
             margin-bottom: 25px;
             width: 100%;
@@ -443,74 +452,92 @@
             border: 1px solid #ddd;
             margin-bottom: 20px;
         }
+        .input-form-container-invite .input-group input{
+            cursor: copy;
+            background: #f8f8f8;
+            border: 1px dashed #4a90e2;
+        }
         .invite-buttons{
             width: 100%;
             margin-top: 15px;
         }
         .copy-link-btn{
-            background:linear-gradient(145deg, #00bfff, #0077b3);
+            background:linear-gradient(145deg, #4a90e2, #357abd);
             color:#fff;border:none;padding:12px 30px;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;
-            box-shadow:0 5px 0 #005a8d;transition:all .1s ease;
+            box-shadow:0 5px 0 #2c5aa0;transition:all .1s ease;
             width: 100%;
         }
-        .copy-link-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #005a8d}
+        .copy-link-btn:active{transform:translateY(3px);box-shadow:0 2px 0 #2c5aa0}
+        .note{
+            font-size: 14px;
+            color: #888;
+            text-align: center;
+            max-width: 400px;
+            padding: 10px;
+            margin-top: 15px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border-left: 3px solid #4a90e2;
+        }
 
-        /* ===== Alert Box (No changes needed) ===== */
+        /* ===== Custom Alert Styling (Paper/Pencil Theme) ===== */
         .custom-alert-overlay {
             position: fixed;
             inset: 0;
             background: rgba(0, 0, 0, 0.7);
-            display: flex;
+            display: none; /* Controlled by JS */
             justify-content: center;
             align-items: center;
-            z-index: 99999;
+            z-index: 10000;
             opacity: 0;
-            pointer-events: none;
             transition: opacity 0.3s ease;
         }
         .custom-alert-overlay.visible {
+            display: flex;
             opacity: 1;
-            pointer-events: auto;
         }
         .custom-alert-box {
-            background: #fff;
-            padding: 25px;
+            background: #fff0d9; /* Off-white/Paper color */
+            border: 2px solid #8B4513; /* Brown/Pencil color border */
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-width: 80%;
+            padding: 30px;
+            width: 90%;
+            max-width: 350px;
             text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 0 5px rgba(139, 69, 19, 0.2);
             position: relative;
             transform: scale(0.9);
             transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 5px solid #ffc107; /* Base border for the paper theme */
         }
         .custom-alert-overlay.visible .custom-alert-box {
             transform: scale(1);
         }
         .alert-icon {
-            font-size: 30px;
-            margin-bottom: 10px;
+            font-size: 40px;
+            margin-bottom: 15px;
         }
         .alert-icon::before {
-            content: '📌'; /* Default marker icon */
+            content: '✏️'; /* Default icon */
         }
         .alert-title {
-            font-size: 22px;
-            font-weight: 700;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            color: #8B4513; /* Brown/Pencil color */
             margin-bottom: 10px;
-            color: #333;
+            font-weight: 700;
         }
         .alert-message {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 20px;
-            white-space: pre-wrap; /* For multiline messages */
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.4;
+            white-space: pre-wrap; /* Allows new lines */
         }
         .alert-close-btn {
-            background:linear-gradient(145deg, #a0522d, #8b4513); /* Sienna/Brown for a pencil/old paper theme */
-            color:#fff;
-            border:none;
-            padding:10px 25px;
+            background:linear-gradient(145deg, #a0522d, #8b4513); /* Brown color */
+            color: #fff;
+            border: none;
+            padding: 10px 25px;
             border-radius: 8px;
             font-size: 15px;
             font-weight: bold;
@@ -522,32 +549,49 @@
             transform: translateY(2px);
             box-shadow: 0 2px 0 #543b27;
         }
+
         /* Specific styles for Success */
-        .custom-alert-box.success .alert-title { color: #28a745; }
-        .custom-alert-box.success .alert-icon::before { content: '🎮'; }
+        .custom-alert-box.success .alert-title {
+            color: #28a745;
+        }
+        .custom-alert-box.success .alert-icon::before {
+            content: '🎉';
+        }
+
         /* Specific styles for Error/Warning */
-        .custom-alert-box.error .alert-title { color: #dc3545; }
-        .custom-alert-box.error .alert-icon::before { content: '🤦'; }
+        .custom-alert-box.error .alert-title {
+            color: #dc3545;
+        }
+        .custom-alert-box.error .alert-icon::before {
+            content: '❌';
+        }
+
         /* Specific styles for Warning/Info - Using Yellow/Brown for Pencil/Paper Theme */
-        .custom-alert-box.warning .alert-title { color: #8B4513; } /* Brown */
-        .custom-alert-box.warning .alert-icon::before { content: '✍️'; } /* Pencil/Writing Icon */
+        .custom-alert-box.warning .alert-title {
+            color: #ff8c00;
+        }
+        .custom-alert-box.warning .alert-icon::before {
+            content: '✍️'; 
+        }
     </style>
 </head>
 <body>
+
     <div class="loading-screen" id="loadingScreen">
         <div class="spinner-circle"></div>
     </div>
-    
+
     <div class="app-screen main-screen" id="mainScreen">
-        <div class="balance" id="shibBalance">0 SHIB</div>
-        
+
         <div class="user-circle" onclick="circleClick()">
-            <img id="userImage" style="display:none;" alt="User Photo">
-            <div class="placeholder">TAP</div>
+            <img id="userImage" alt="User Photo">
+            <span class="placeholder">PFP</span>
         </div>
-        <div class="user-username" id="userName">User</div>
-        <div class="user-id" id="userId">ID: 0</div>
-        
+        <div class="user-username" id="userName">User Name</div>
+        <div class="user-id" id="userId">ID: 000</div>
+
+        <div class="balance" id="shibBalance">0 SHIB</div>
+
         <div class="progress-group-container">
             <div class="daily-progress-container">
                 <div class="daily-progress-text">Ads today: <span id="adsCount">0</span> / 100</div>
@@ -555,8 +599,9 @@
                     <div class="daily-progress-fill" id="dailyProgressFill"></div>
                 </div>
             </div>
+
             <div class="spin-progress-container">
-                <div class="spin-progress-text">Spins today: <span id="spinCount">0</span> / 15</div>
+                <div class="spin-progress-text">Spins today: <span id="spinsCount">0</span> / 15</div>
                 <div class="spin-progress-bar">
                     <div class="spin-progress-fill" id="spinProgressFill"></div>
                 </div>
@@ -564,94 +609,76 @@
         </div>
 
         <div class="button-container">
-            <button class="nav-button" onclick="watchAds()">
-                <span>📺 Ads</span>
-            </button>
-            <button class="nav-button" onclick="showSpin()">
-                <span>🎡 Spin</span>
-            </button>
-            <button class="nav-button task-btn" onclick="showTask()">
-                <span>📋 Task</span>
-            </button>
-            <button class="nav-button withdraw-btn-nav" onclick="showWithdraw()">
-                <span>💰 Withdraw</span>
-            </button>
-            <button class="nav-button" onclick="showInvite()">
-                <span>👥 Invite</span>
-            </button>
+            <button class="nav-button" onclick="watchAds()"><span>WATCH ADS</span></button>
+            <button class="nav-button" onclick="showSpin()"><span>SPIN</span></button>
+            <button class="nav-button task-btn" onclick="showTask()"><span>TASK</span></button>
+            <button class="nav-button" onclick="showInvite()"><span>INVITE</span></button>
+            <button class="nav-button withdraw-btn-nav" onclick="showWithdraw()"><span>WITHDRAW</span></button>
         </div>
+
     </div>
 
-    <div class="app-screen task-screen" id="taskScreen">
+    <div class="app-screen" id="taskScreen">
         <div class="task-header">
-            <div class="task-title">Daily Task</div>
+            <div class="task-title">Daily Missions</div>
         </div>
         
         <div class="task-content-container" id="taskContentContainer">
-            <div class="task-item-card" id="oldTaskCard">
-                <div>
-                    <div class="task-text-info">Join Our Telegram Channel</div>
-                    <div id="taskRewardText" style="font-size:12px; color:#4a90e2; margin-top:5px; font-weight:600;">Reward: 50 SHIB</div>
-                </div>
+            
+            <div class="task-item-card">
+                <span class="task-text-info">Join Our Telegram Channel (50 SHIB)</span>
                 <button class="task-action-btn-new" id="taskActionBtn" onclick="handleTaskAction()">Join</button>
             </div>
+            
             </div>
         
         <button class="task-back-btn" onclick="hideTask()">Back to Main</button>
     </div>
 
+
     <div class="app-screen spin-screen" id="spinScreen">
         <div id="wheelBox">
-            <div class="arrow"></div>
             <canvas id="wheelCanvas" width="300" height="300"></canvas>
+            <div class="arrow"></div>
         </div>
-        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">SPIN</button>
         <div class="spin-result" id="spinResult">Ready to spin!</div>
-        <button class="spin-back" onclick="hideSpin()">Back</button>
+        <button class="spin-btn" id="spinBtn" onclick="spinWheel()">SPIN</button>
+        <button class="spin-back" onclick="hideSpin()">Back to Main</button>
     </div>
 
     <div class="app-screen withdraw-screen" id="withdrawScreen">
         <div class="withdraw-header">
             <div class="withdraw-title">Withdraw SHIB</div>
-            <div class="current-balance-info">Your Balance: <span id="withdrawBalance">0</span> SHIB</div>
+            <div class="current-balance-info">Your Current Balance: <span id="withdrawBalance">0</span> SHIB</div>
         </div>
         <div class="input-form-container">
             <div class="input-group">
-                <label for="binanceIdInput">Binance Pay ID (Your ID):</label>
-                <input type="text" id="binanceIdInput" placeholder="Enter your Binance Pay ID">
+                <label for="binanceId">Binance Pay ID or Wallet Address</label>
+                <input type="text" id="binanceId" placeholder="Enter ID or Address">
             </div>
             <div class="input-group">
-                <label for="amountInput">Amount (Min 1,000 SHIB):</label>
-                <input type="number" id="amountInput" placeholder="e.g., 1000" min="1000">
+                <label for="withdrawAmount">Amount (Min: 5000 SHIB)</label>
+                <input type="number" id="withdrawAmount" placeholder="Enter amount">
             </div>
             <div class="withdraw-buttons">
-                <button class="withdraw-btn" onclick="submitWithdrawal()">Request Withdrawal</button>
+                <button class="withdraw-btn" onclick="withdraw()">WITHDRAW</button>
             </div>
-        </div>
-        <div class="note">
-            ⚠️ Please ensure the Binance Pay ID is correct. Transactions are irreversible. Processing may take up to 24 hours.
         </div>
         
         <div class="history-section">
             <div class="history-title">Withdrawal History</div>
-            <table class="history-table" id="withdrawalHistoryTable">
-                <thead>
-                    <tr>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    </tbody>
-            </table>
+            <ul class="history-list" id="withdrawalHistoryList">
+                <li class="no-records">No withdrawal records found.</li>
+            </ul>
         </div>
+        
         <button class="back-btn" onclick="hideWithdraw()">Back to Main</button>
     </div>
-    
+
+
     <div class="app-screen invite-screen" id="inviteScreen">
         <div class="invite-header">
-            <div class="invite-title">Invite Friends</div>
+            <div class="invite-title">Invite & Earn</div>
             <div class="referrals-count-info">Total Referrals: <span id="referralsCount">0</span></div>
         </div>
         <div class="input-form-container-invite">
@@ -668,6 +695,7 @@
         </div>
         <button class="back-btn" onclick="hideInvite()">Back to Main</button>
     </div>
+
 
     <div id="customAlert" class="custom-alert-overlay">
         <div class="custom-alert-box">
@@ -689,330 +717,151 @@
         <source src="error.mp3" type="audio/mp3">
     </audio>
 
-    <script src='//libtl.com/sdk.js' data-zone='10245709' data-sdk='show_10245709'></script>
-    
+
+    <script src='//libtl.com/ads.js?id=10245709'></script>
     <script>
-        /* ===== Global Constants and State (MODIFIED) ===== */
-        const API_URL = '/api';
+        // Set up constants for the frontend
         const DAILY_MAX = 100;
         const DAILY_MAX_SPINS = 15;
-        const TASK_REWARD = 50;
-        const SPIN_SECTORS_PRIZES = [5, 10, 15, 20, 5];
-        let taskCompleted = false; // State from the server for the OLD task
-        let isProcessingTask = false;
-        let countdownInterval = null;
-        let taskActionState = 'JOIN_OR_CLAIM'; // JOIN_OR_CLAIM, CLAIM, COMPLETED (for the OLD task)
-        
-        let state = {
+        const MIN_WITHDRAW = 5000;
+        const BASE_API_URL = '/api/'; 
+
+        // Spin wheel sectors (must match server)
+        const sectors = [5, 10, 15, 20, 5]; 
+
+        // State Management
+        let appState = {
             balance: 0,
             ads_watched_today: 0,
             spins_today: 0,
             referrals_count: 0,
             is_banned: false,
+            task_completed: false,
             withdrawal_history: [],
-            newTasks: [] // ⬅️ NEW STATE FOR NEW TASKS
+            new_tasks: [] // Added for new dynamic tasks
         };
-        
-        /* ===== Utility Functions (No change) ===== */
-        
+
+        let taskActionState = 'JOIN_OR_CLAIM'; // 'JOIN_OR_CLAIM', 'CLAIM', 'COMPLETED'
+        let isProcessingTask = false;
+        let countdownInterval = null;
+        let isSpinning = false;
+        let isBanned = false;
+        let tgUser = null; // Telegram User Data
+
+        // DOM Elements
+        const mainScreen = document.getElementById('mainScreen');
+        const loadingScreen = document.getElementById('loadingScreen');
+        const taskActionBtn = document.getElementById('taskActionBtn');
+
+
+        /* ===== Audio Functions (No changes needed) ===== */
+        function playSFX(type) {
+            const audio = document.getElementById(type + 'SFX');
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play().catch(e => console.log('Audio play failed:', e));
+            }
+        }
+        function playBGAudio() {
+            const audio = document.getElementById('backgroundAudio');
+            if (audio) {
+                audio.volume = 0.5;
+                audio.play().catch(e => console.log('Background audio play failed:', e));
+            }
+        }
+
+
+        /* ===== Custom Alert Functions (No changes needed) ===== */
+        function showCustomAlert(title, message, type = 'warning') {
+            playSFX(type === 'success' ? 'success' : 'error');
+            const alertOverlay = document.getElementById('customAlert');
+            const alertBox = alertOverlay.querySelector('.custom-alert-box');
+            
+            document.getElementById('alertTitle').textContent = title;
+            document.getElementById('alertMessage').textContent = message;
+
+            // Reset classes and set new ones
+            alertBox.className = 'custom-alert-box'; // Reset
+            alertBox.classList.add(type);
+            
+            // Set the icon based on type (icon is set via CSS ::before now, but this ensures the type is correct)
+            // Note: The icon is primarily controlled by CSS in this setup.
+            
+            alertOverlay.classList.add('visible');
+        }
+
+
+        /* ===== State & UI Management (Added new_tasks to updateUI) ===== */
         function updateState(newState) {
-            Object.assign(state, newState);
+            Object.assign(appState, newState);
             updateUI();
         }
 
-        function showCustomAlert(title, message, type = 'info') {
-            // ... (Existing implementation)
-        }
-        
-        async function fetchApi(payload) {
-            // ... (Existing implementation)
-            // ⚠️ Added support for 'completeNewTask' error message translation
-            if (payload.type === 'completeNewTask' && errorMessage.includes('already completed')) {
-                alertTitle = 'Task Completed!';
-                alertType = 'warning';
-                cleanMessage = 'Reward already claimed. Task is complete.';
-            } else if (payload.type === 'completeNewTask' && errorMessage.includes('reached maximum')) {
-                alertTitle = 'Task Full!';
-                alertType = 'warning';
-                cleanMessage = 'Task capacity reached. The task is no longer available.';
-            } 
-            // ... (Rest of existing implementation)
-        }
-        
-        async function requestActionId(actionType) {
-            // ... (Existing implementation)
-        }
-
-        /* ===== UI and Data Handlers (MODIFIED) ===== */
-
         function updateUI() {
-            // ... (Existing balance, progress, spin UI updates)
+            // General UI
+            document.getElementById('shibBalance').textContent = appState.balance.toLocaleString('en-US', { maximumFractionDigits: 4 }) + ' SHIB';
+            document.getElementById('adsCount').textContent = appState.ads_watched_today;
+            document.getElementById('spinsCount').textContent = appState.spins_today;
+            document.getElementById('referralsCount').textContent = appState.referrals_count;
             
-            // --- Task Screen UI (FOR OLD TASK) ---
-            const taskBtn = document.getElementById('taskActionBtn');
-            const taskRewardText = document.getElementById('taskRewardText');
-            
-            if (taskBtn) {
-                if (isProcessingTask) {
-                    // Countdown is running, text is handled in claimTaskReward
-                    taskBtn.disabled = true;
-                } else if (taskActionState === 'COMPLETED') {
-                    taskBtn.textContent = 'Completed';
-                    taskBtn.disabled = true;
-                    taskBtn.classList.remove('task-action-btn-new');
-                    taskBtn.classList.add('completed');
-                } else if (taskActionState === 'CLAIM') {
-                    taskBtn.textContent = 'Claim';
-                    taskBtn.disabled = false;
-                    taskBtn.classList.remove('completed');
-                    taskBtn.classList.add('task-action-btn-new');
-                } else { // JOIN_OR_CLAIM
-                    taskBtn.textContent = 'Join';
-                    taskBtn.disabled = false;
-                    taskBtn.classList.remove('completed');
-                    taskBtn.classList.add('task-action-btn-new');
+            // Progress Bars
+            const adsProgress = (appState.ads_watched_today / DAILY_MAX) * 100;
+            document.getElementById('dailyProgressFill').style.width = `${Math.min(adsProgress, 100)}%`;
+
+            const spinsProgress = (appState.spins_today / DAILY_MAX_SPINS) * 100;
+            document.getElementById('spinProgressFill').style.width = `${Math.min(spinsProgress, 100)}%`;
+
+            // Spin Button State
+            const spinBtn = document.getElementById('spinBtn');
+            if (spinBtn) {
+                if (isBanned) {
+                    spinBtn.disabled = true;
+                    spinBtn.textContent = 'ACCOUNT BANNED';
+                } else if (appState.spins_today >= DAILY_MAX_SPINS) {
+                    spinBtn.disabled = true;
+                    spinBtn.textContent = `LIMIT REACHED (${appState.spins_today}/${DAILY_MAX_SPINS})`;
+                } else if (!isSpinning) {
+                    spinBtn.disabled = false;
+                    spinBtn.textContent = 'SPIN';
                 }
             }
-            if (taskRewardText) {
-                 taskRewardText.textContent = `Reward: ${TASK_REWARD} SHIB`;
-            }
-
-            // ⬅️ NEW: Render the new tasks if the task screen is visible
-            if (document.getElementById('taskScreen').classList.contains('visible')) {
-                renderNewTasks();
-            }
-        }
-        
-        async function loadUserData() {
-            // ... (Existing implementation)
-            // ⬅️ Keep only the essential data for the main screen. New task data will be loaded separately.
-            if (result.ok) {
-                if (result.data.is_banned) {
-                    // ... (Existing ban handling)
-                }
-                updateState({
-                    balance: result.data.balance,
-                    ads_watched_today: result.data.ads_watched_today,
-                    spins_today: result.data.spins_today,
-                    referrals_count: result.data.referrals_count,
-                    is_banned: false,
-                    task_completed: result.data.task_completed || false,
-                    withdrawal_history: (result.data.withdrawal_history || []).map(item => ({ 
-                        amount: item.amount, 
-                        status: item.status, 
-                        date: new Date(item.created_at).toLocaleDateString('en-GB') 
-                    })),
-                    // newTasks is NOT loaded here
-                });
-                // ... (Existing state update for old task)
-                mainScreen.classList.add('visible');
-            }
-        }
-        
-        // ... (Existing initDailyProgress, drawWheel, spinWheel, watchAds, circleClick)
-
-        /* ===== Task Screen Functions (MODIFIED) ===== */
-
-        async function loadNewTasks() {
-            if (!tgUser) return;
-            const container = document.getElementById('taskContentContainer');
-            // Check if the old card is present before clearing.
-            const oldTaskCard = document.getElementById('oldTaskCard');
-            const oldCardHTML = oldTaskCard ? oldTaskCard.outerHTML : '';
             
-            // Temporary placeholder for loading
-            container.innerHTML = oldCardHTML + '<div id="newTasksPlaceholder" style="text-align:center; padding: 20px; color:#555;">Loading new tasks...</div>';
-            
-            const result = await fetchApi({
-                type: 'getNewTasks', // ⬅️ NEW API TYPE
-            });
+            // Withdraw Screen
+            document.getElementById('withdrawBalance').textContent = appState.balance.toLocaleString('en-US', { maximumFractionDigits: 4 });
 
-            if (result.ok) {
-                updateState({ newTasks: result.data.tasks });
-            } else {
-                 document.getElementById('newTasksPlaceholder').innerHTML = '<div style="text-align:center; padding: 20px; color:#dc3545; font-weight:bold;">Failed to load tasks.</div>';
-            }
-        }
-
-        function renderNewTasks() {
-            const container = document.getElementById('taskContentContainer');
-            const oldTaskCard = document.getElementById('oldTaskCard');
-            const oldCardHTML = oldTaskCard ? oldTaskCard.outerHTML : '';
-            
-            // Clear and re-insert the old card
-            container.innerHTML = oldCardHTML; 
-
-            if (state.newTasks.length === 0) {
-                container.innerHTML += '<div style="text-align:center; padding: 20px; color:#999;">No new tasks available. Check back later.</div>';
-                return;
-            }
-
-            state.newTasks.forEach(task => {
-                const isCompleted = task.is_completed;
-                const buttonText = isCompleted ? 'Completed' : 'Go to Task';
-                const buttonClass = isCompleted ? 'task-action-btn-new completed' : 'task-action-btn-new';
-                const isDisabled = isCompleted ? 'disabled' : '';
-                
-                // Use task_reward.toLocaleString() to ensure formatting
-                const reward = task.task_reward ? parseFloat(task.task_reward).toLocaleString() : '0';
-
-                const taskHtml = `
-                    <div class="task-item-card" data-task-id="${task.id}">
-                        <div>
-                            <div class="task-text-info">${task.task_name}</div>
-                            <div style="font-size:12px; color:#4a90e2; margin-top:5px; font-weight:600;">Reward: ${reward} SHIB</div>
-                            <div style="font-size:10px; color:#888; margin-top:2px;">Users: ${task.current_users.toLocaleString()} / ${task.max_users.toLocaleString()}</div>
-                        </div>
-                        <button 
-                            class="${buttonClass}" 
-                            ${isDisabled}
-                            onclick="handleNewTaskClick(${task.id}, '${task.task_url}', ${isCompleted}, this)"
-                            data-task-url="${task.task_url}"
-                        >
-                            ${buttonText}
-                        </button>
-                    </div>
-                `;
-                container.innerHTML += taskHtml;
-            });
-        }
-        
-        async function handleNewTaskClick(taskId, taskUrl, isCompleted, buttonElement) {
-            if (isCompleted) {
-                showCustomAlert('Task Completed!', 'Reward already claimed. This task is complete.', 'warning');
-                return;
-            }
-
-            // 1. Redirect to URL (Go to Task)
-            if (buttonElement.textContent === 'Go to Task') {
-                buttonElement.disabled = true;
-                buttonElement.textContent = 'Redirecting...';
-
-                // Open the link
-                if (typeof Telegram.WebApp.openTelegramLink === 'function') {
-                    Telegram.WebApp.openTelegramLink(taskUrl);
+            // Task Button State (Join Telegram Task)
+            if (taskActionBtn) {
+                if (isBanned) {
+                    taskActionBtn.disabled = true;
+                    taskActionBtn.textContent = 'BANNED';
+                    taskActionBtn.classList.add('completed');
+                } else if (appState.task_completed) {
+                    taskActionState = 'COMPLETED'; // Ensure state is correct
+                    taskActionBtn.disabled = true;
+                    taskActionBtn.textContent = 'Completed';
+                    taskActionBtn.classList.add('completed');
                 } else {
-                    window.open(taskUrl, '_blank');
-                }
-
-                // After opening, change button to 'Claim' and prompt user
-                setTimeout(() => {
-                    buttonElement.disabled = false;
-                    buttonElement.textContent = 'Claim Reward';
-                    showCustomAlert('Action Required', 'Please complete the task and click "Claim Reward" to get your SHIB.', 'warning');
-                }, 1000); 
-                
-                return;
-            }
-            
-            // 2. Claim Reward (Claim Reward)
-            if (buttonElement.textContent === 'Claim Reward') {
-                const originalText = buttonElement.textContent;
-                buttonElement.disabled = true;
-                
-                // a. Request Action ID
-                const actionId = await requestActionId('completeNewTask'); // ⬅️ New action type
-                if (!actionId) {
-                    buttonElement.disabled = false;
-                    buttonElement.textContent = originalText;
-                    return;
-                }
-
-                // b. Send Completion Request
-                buttonElement.textContent = 'Claiming...';
-                const result = await fetchApi({
-                    type: 'completeNewTask', // ⬅️ NEW API TYPE
-                    task_id: taskId,
-                    action_id: actionId,
-                });
-
-                if (result.ok) {
-                    // Success: Update UI and state
-                    updateState({ balance: result.data.new_balance });
-                    
-                    buttonElement.textContent = 'Completed';
-                    buttonElement.classList.remove('task-action-btn-new');
-                    buttonElement.classList.add('completed');
-                    buttonElement.disabled = true;
-                    
-                    // Update local state for this task
-                    state.newTasks = state.newTasks.map(t => 
-                        t.id === taskId ? { 
-                            ...t, 
-                            is_completed: true, 
-                            current_users: result.data.new_current_users 
-                        } : t
-                    );
-                    renderNewTasks(); // Re-render to update the user count display
-
-                    showCustomAlert('Success!', `You earned ${result.data.actual_reward} SHIB!`, 'success');
-                } else {
-                    // Error: Check for specific messages
-                    let errorMessage = 'Failed to claim reward. Please ensure you completed the task.';
-                    if (result.error && result.error.includes('already completed')) {
-                        errorMessage = 'Reward already claimed. Task is complete.';
-                        // Force update button and state
-                        buttonElement.textContent = 'Completed';
-                        buttonElement.classList.remove('task-action-btn-new');
-                        buttonElement.classList.add('completed');
-                        buttonElement.disabled = true;
-                         // Update local state if server confirmed completion
-                        state.newTasks = state.newTasks.map(t => t.id === taskId ? { ...t, is_completed: true } : t);
-                        renderNewTasks();
-                    } else if (result.error && result.error.includes('reached maximum')) {
-                        errorMessage = 'Task capacity reached. The task is no longer available.';
-                        // If task is full, disable it
-                        buttonElement.textContent = 'Full';
-                        buttonElement.disabled = true;
-                        // Update local state if task is full
-                        state.newTasks = state.newTasks.map(t => t.id === taskId ? { ...t, max_users: t.current_users } : t);
-                        renderNewTasks(); 
-                    } else if (result.error && result.error.includes('User not found')) {
-                         errorMessage = 'User data error. Please try restarting the Mini App.';
-                    } else if (result.error) {
-                        errorMessage = result.error;
-                    }
-
-                    showCustomAlert('Claim Failed!', errorMessage, 'error');
-                    
-                    // Reset button if error was not about completion/fullness
-                    if (!result.error || (!result.error.includes('already completed') && !result.error.includes('reached maximum'))) {
-                         buttonElement.disabled = false;
-                         buttonElement.textContent = originalText; // Keep as 'Claim Reward' for retrying
+                    taskActionBtn.classList.remove('completed');
+                    if (taskActionState === 'JOIN_OR_CLAIM') {
+                        taskActionBtn.textContent = 'Join';
+                        taskActionBtn.disabled = false;
+                    } else if (taskActionState === 'CLAIM') {
+                        taskActionBtn.textContent = 'Claim Reward';
+                        taskActionBtn.disabled = false;
+                    } else if (isProcessingTask) {
+                        taskActionBtn.textContent = 'Claiming...';
+                        taskActionBtn.disabled = true;
                     }
                 }
             }
+
+            // Render Dynamic Tasks
+            renderNewTasks();
         }
 
-        // ** MODIFIED: Now displays the actual task screen and loads new tasks **
-        function showTask(){
-            if (isBanned) {
-                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
-                return;
-            }
-            mainScreen.classList.remove('visible');
-            document.getElementById('taskScreen').classList.add('visible');
-            loadUserData(); // Load user data for the old task status/balance
-            loadNewTasks(); // ⬅️ NEW: Load the new tasks list
-        }
 
-        function hideTask(){
-            // ... (Existing implementation)
-        }
-
-        async function claimTaskReward(){
-            // ... (Existing implementation for the OLD task - No change)
-        }
-
-        function handleTaskAction() {
-            // ... (Existing implementation for the OLD task - No change)
-        }
-        
-        // ... (Rest of existing JS functions: showSpin, hideSpin, showWithdraw, hideWithdraw, submitWithdrawal, displayWithdrawals, showInvite, hideInvite, copyReferralLink, Audio functions, Init and Event listeners)
-        
         /* ===== Telegram User & Referral Setup (Modified to include audio) ===== */
-        Telegram.WebApp.ready();
-        let tgUser = null;
+        Telegram.WebApp.ready(); 
         if(Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user){
             tgUser = Telegram.WebApp.initDataUnsafe.user;
             const photoUrl = tgUser.photo_url;
@@ -1022,6 +871,7 @@
             const nameEl = document.getElementById('userName');
             const idEl = document.getElementById('userId');
             const placeHolder = document.querySelector('.placeholder');
+
             if(photoUrl){
                 imgEl.src = photoUrl;
                 imgEl.style.display = 'block';
@@ -1044,35 +894,33 @@
             return referrerId;
         }
 
-        let referrerId = getRefParam();
-        
-        // ------------------------------------------------------------------
-        // Fetch API Core Function
-        // ------------------------------------------------------------------
-        // ... (Existing fetchApi function)
-        async function fetchApi(payload) {
-            if (!tgUser && payload.type !== 'commission') {
-                showCustomAlert('Error!', 'Telegram user data is missing. Please open the Mini App from Telegram.', 'error');
-                return { ok: false, error: 'User data missing.' };
-            }
 
+        /* ===== API Fetch Wrapper (No changes needed) ===== */
+        async function fetchApi(payload) {
             if (typeof Telegram.WebApp.showProgress === 'function') {
-                Telegram.WebApp.showProgress(true);
+                // Use native Telegram progress bar during API calls
+                Telegram.WebApp.showProgress();
             }
             
-            const fullPayload = {
-                ...payload,
-                user_id: tgUser ? tgUser.id : null,
-                initData: Telegram.WebApp.initData,
-            };
+            const endpoint = BASE_API_URL + 'index.js';
 
             try {
-                const response = await fetch(API_URL, {
+                // Inject initData for security validation on the server side
+                if (!payload.initData) {
+                    payload.initData = Telegram.WebApp.initData;
+                }
+
+                // Inject user_id from the globally stored user data
+                if (!payload.user_id && tgUser) {
+                    payload.user_id = tgUser.id;
+                }
+
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(fullPayload),
+                    body: JSON.stringify(payload)
                 });
 
                 if (typeof Telegram.WebApp.hideProgress === 'function') {
@@ -1082,18 +930,31 @@
                 const data = await response.json();
 
                 if (!response.ok || !data.ok) {
-                    const errorMessage = data.error || `Server error (Status ${response.status})`;
+                    const errorMessage = data.error || `Server responded with status: ${response.status}`;
                     console.error(`API Error for type ${payload.type}:`, errorMessage);
 
-                    let cleanMessage;
                     let alertTitle;
+                    let cleanMessage;
                     let alertType;
 
-                    // Specific error handling for Arabic and English translations
-                    if (response.status === 401) {
-                         alertTitle = 'Security Check Failed!';
-                         alertType = 'error';
-                         cleanMessage = 'Your session has expired. Please restart the Mini App.';
+                    // Specific error handling for Arabic alerts (as requested by previous steps)
+                    if (response.status === 429) {
+                        const remainingTime = data.remainingTime ? Math.ceil(data.remainingTime / 1000) : 3;
+                        alertTitle = 'Wait!';
+                        alertType = 'warning';
+                        cleanMessage = `Please wait ${remainingTime} seconds before the next action.`;
+                    } else if (response.status === 403 && errorMessage.includes('limit reached')) {
+                        alertTitle = 'Daily Limit Reached!';
+                        alertType = 'warning';
+                        cleanMessage = 'You have reached the limit for this action today.';
+                    } else if (response.status === 403 && errorMessage.includes('banned')) {
+                        alertTitle = 'Account Banned!';
+                        alertType = 'error';
+                        cleanMessage = 'This account has been permanently restricted.';
+                    } else if (response.status === 401) {
+                        alertTitle = 'Security Error!';
+                        alertType = 'error';
+                        cleanMessage = 'Session expired or invalid. Please reload the Mini App.';
                     } else if (response.status === 409 || response.status === 408) {
                         alertTitle = 'Security Error!';
                         alertType = 'error';
@@ -1106,24 +967,19 @@
                         alertTitle = 'Task Failed!';
                         alertType = 'error';
                         cleanMessage = 'Membership not verified. Please ensure you joined the channel and try again.';
-                    } else if (payload.type === 'completeNewTask' && errorMessage.includes('already completed')) {
-                        alertTitle = 'Task Completed!';
-                        alertType = 'warning';
-                        cleanMessage = 'Reward already claimed. Task is complete.';
-                    } else if (payload.type === 'completeNewTask' && errorMessage.includes('reached maximum')) {
-                        alertTitle = 'Task Full!';
-                        alertType = 'warning';
-                        cleanMessage = 'Task capacity reached. The task is no longer available.';
                     } else {
                         // General error handling (English)
                         alertTitle = 'Operation Failed!';
                         alertType = 'error';
                         cleanMessage = errorMessage;
                     }
+                    
                     showCustomAlert(alertTitle, cleanMessage, alertType);
                     return { ok: false, error: errorMessage };
                 }
+
                 return data;
+
             } catch (error) {
                 if (typeof Telegram.WebApp.hideProgress === 'function') {
                     Telegram.WebApp.hideProgress();
@@ -1134,39 +990,775 @@
                 return { ok: false, error: error.message };
             }
         }
-        
-        // ------------------------------------------------------------------
-        // NEW: Function to request Action ID from the Server
-        // ------------------------------------------------------------------
+
+
+        /* ===== Main Data Load Function (Used to sync state with server) ===== */
+        async function loadUserData() {
+            if (!tgUser) return;
+            const result = await fetchApi({ type: 'getUserData' });
+            
+            if (result.ok) {
+                if (result.data.is_banned) {
+                    isBanned = true;
+                    mainScreen.classList.remove('visible'); 
+                    // English translation of the Arabic alert message
+                    showCustomAlert('Account Banned!', 'This account has been permanently restricted for violating policies. Access to the Mini App is denied.', 'error');
+                    return;
+                }
+
+                updateState({
+                    balance: result.data.balance,
+                    ads_watched_today: result.data.ads_watched_today,
+                    spins_today: result.data.spins_today,
+                    referrals_count: result.data.referrals_count,
+                    is_banned: false,
+                    task_completed: result.data.task_completed || false, // Default to false
+                    withdrawal_history: (result.data.withdrawal_history || []).map(item => ({ 
+                        amount: item.amount, 
+                        status: item.status, 
+                        date: new Date(item.created_at).toLocaleDateString('en-GB') 
+                    })),
+                    // NEW: Load new dynamic tasks
+                    new_tasks: result.data.new_tasks || [] 
+                });
+
+                // Set taskActionState based on loaded data
+                if (appState.task_completed) {
+                    taskActionState = 'COMPLETED';
+                } else if (taskActionState === 'COMPLETED') { 
+                    // Prevents resetting to COMPLETED if an error occurred during claim
+                    taskActionState = 'JOIN_OR_CLAIM'; 
+                }
+
+            }
+        }
+
+
+        /* ===== Watch Ads Functions (No changes needed) ===== */
+        // Function to request Action ID from the Server
         async function requestActionId(actionType) {
-            const result = await fetchApi({
-                type: 'generateActionId',
-                action_type: actionType
-            });
+            if (isBanned) { return null; }
+            const result = await fetchApi({ type: 'getActionId', action_type: actionType });
             if (result.ok) {
                 return result.data.action_id;
             }
-            return null;
+            return null; // Error message shown inside fetchApi
         }
 
-        // ------------------------------------------------------------------
-        // Initialization and Event Listeners
-        // ------------------------------------------------------------------
+        // ***************************************************************
+        // UPDATED watchAds FUNCTION FOR TWO SEQUENTIAL ADS (NO INTERMEDIATE ALERTS)
+        // ***************************************************************
+        async function watchAds(){
+            if (isBanned) {
+                // English translation of the Arabic alert message
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
 
-        // ... (Existing init, runRegister, initDailyProgress, etc.)
+            if (appState.ads_watched_today >= DAILY_MAX) {
+                showCustomAlert('Daily Limit Reached!', `ＡＬＬ ａｄｓ Ｄｏｎｅ (${DAILY_MAX}). Ｃｏｍｅ ｂａｃｋ Ａｆｔｅｒ 6 Ｈｏｕｒｓ🥩!`, 'warning');
+                return;
+            }
 
-        async function init(){
-            // ... (Existing code)
+            // 1. Request Action ID from the Server
+            const actionId = await requestActionId('watchAd');
+            if (!actionId) return; // Error message already shown by fetchApi
+
+            // 2. Show First Ad - NO ALERT HERE
+            show_10245709()
+            .then(() => {
+                // Success for Ad 1 - Immediately start the second ad - NO ALERT
+                show_10245709()
+                .then(async () => {
+                    // Success for Ad 2 - Now call the server to claim reward
+                    const result = await fetchApi({ 
+                        type: 'watchAd', 
+                        action_id: actionId // ⬅️ Send Action ID
+                    }); 
+                    
+                    await loadUserData(); // Refresh all data
+
+                    if (result.ok) {
+                        const reward = result.data.actual_reward;
+                        // English translation of the Arabic alert message
+                        showCustomAlert('Reward Claimed!', `You received ${reward} SHIB for watching 2 ads!`, 'success');
+                    }
+                    
+                })
+                .catch(async (e) => {
+                    // Ad 2 failure (user cancellation or error)
+                    await loadUserData();
+                    if (typeof e === 'string' && e.includes('canceled')) {
+                        // English translation of the Arabic alert message
+                        showCustomAlert('Ad Cancelled/Failed!', 'The second ad was not watched completely. The attempt was not counted.', 'warning');
+                    } else {
+                         // English translation of the Arabic alert message
+                        showCustomAlert('Ad Load Failed!', 'The second ad failed to load. Please try again.', 'error');
+                    }
+                });
+            })
+            .catch(async (e) => {
+                // Ad 1 failure (user cancellation or error)
+                await loadUserData();
+                if (typeof e === 'string' && e.includes('canceled')) {
+                    // English translation of the Arabic alert message
+                    showCustomAlert('Ad Cancelled/Failed!', 'The first ad was not watched completely. The attempt was not counted.', 'warning');
+                } else {
+                     // English translation of the Arabic alert message
+                    showCustomAlert('Ad Load Failed!', 'One of the ads failed to load. Please try again.', 'error');
+                }
+            });
         }
+        // ***************************************************************
+        // END OF UPDATED watchAds FUNCTION
+        // ***************************************************************
+
+
+        function circleClick(){
+            console.log('Circle clicked');
+        }
+
+
+        /* ===== Task Screen Functions (UPDATED LOGIC) ===== */
+        function showTask(){
+            if (isBanned) {
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
+            mainScreen.classList.remove('visible');
+            document.getElementById('taskScreen').classList.add('visible');
+            loadUserData(); // Load latest data including task status
+        }
+
+        function hideTask(){
+            // Clear any running countdown when leaving the screen
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+                countdownInterval = null;
+                isProcessingTask = false;
+                // Reset state in case we were in the middle of a claim
+                taskActionState = appState.task_completed ? 'COMPLETED' : 'JOIN_OR_CLAIM'; 
+                updateUI();
+            }
+            document.getElementById('taskScreen').classList.remove('visible');
+            mainScreen.classList.add('visible');
+        }
+
+        // Renamed and modified the old completeTask function
+        async function claimTaskReward(){
+            if (isBanned) {
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
+            if (isProcessingTask) return; // Prevent double clicking
+            isProcessingTask = true;
+            taskActionBtn.textContent = 'Claiming...';
+            taskActionBtn.disabled = true;
+
+            const actionId = await requestActionId('completeTask'); // Request security token
+            if (!actionId) {
+                isProcessingTask = false;
+                taskActionBtn.textContent = 'Claim Reward'; // Reset button on security token failure
+                taskActionBtn.disabled = false;
+                return;
+            }
+
+            const result = await fetchApi({ 
+                type: 'completeTask',
+                action_id: actionId // Send Action ID
+            });
+
+            isProcessingTask = false;
+            
+            if (result.ok) {
+                const reward = result.data.actual_reward;
+                updateState({ balance: result.data.new_balance, task_completed: true });
+                taskActionState = 'COMPLETED'; // Update state globally
+                // English translation of the Arabic alert message
+                showCustomAlert('Success!', `You received ${reward} SHIB for completing the task!`, 'success');
+            } else {
+                // If the server returns an error about completion or not joined, reset to first state
+                loadUserData(); 
+                taskActionState = 'JOIN_OR_CLAIM'; // Force restart the process
+                taskActionBtn.textContent = 'Join'; // Reset button text manually in case loadUserData fails
+            }
+            updateUI();
+        }
+
+        // NEW function to handle the two-step action (Join -> Claim)
+        function handleTaskAction() {
+            if (appState.task_completed) {
+                showCustomAlert('Task Completed!', 'Reward already claimed. Task is complete.', 'warning');
+                return;
+            }
+
+            if (isProcessingTask) return; // Prevent double clicking during claim process
+            
+            const channelLink = 'https://t.me/botbababab'; // Hardcoded channel link
+
+            if (taskActionState === 'JOIN_OR_CLAIM') {
+                // First click: Redirect to the channel
+                taskActionBtn.disabled = true; // Disable temporarily while opening link
+                taskActionBtn.textContent = 'Joining...';
+                
+                // Use Telegram WebApp function if available, otherwise fallback
+                if (typeof Telegram.WebApp.openTelegramLink === 'function') {
+                    Telegram.WebApp.openTelegramLink(channelLink);
+                } else {
+                    window.open(channelLink, '_blank');
+                }
+
+                // Update state and UI to prompt for the second click (claim)
+                // Re-enable and set state after a small delay to ensure link opens
+                setTimeout(() => {
+                    taskActionState = 'CLAIM';
+                    taskActionBtn.disabled = false;
+                    taskActionBtn.textContent = 'Claim Reward';
+                    updateUI();
+                }, 1000); 
+
+            } else if (taskActionState === 'CLAIM') {
+                // Second click: Claim the reward
+                claimTaskReward();
+            }
+            
+            // Note: If taskActionState is 'COMPLETED', the button is disabled and this function should not be reachable.
+        }
+
+        // --- NEW Dynamic Task System Functions ---
+
+        function renderNewTasks() {
+            const container = document.getElementById('taskContentContainer');
+            
+            // Remove all existing dynamic tasks, but keep the hardcoded one (the first child)
+            while (container.children.length > 1) {
+                container.removeChild(container.lastChild);
+            }
+            
+            if (appState.new_tasks && appState.new_tasks.length > 0) {
+                appState.new_tasks.forEach(task => {
+                    // Only render if the task is not completed or the app wants to show all
+                    if (task.status !== 'COMPLETED' || true) { 
+                        const card = document.createElement('div');
+                        card.className = 'task-item-card';
+                        
+                        const statusClass = task.status === 'COMPLETED' ? 'completed' : 
+                                            task.status === 'READY_TO_CLAIM' ? '' : 'pending';
+                        
+                        let buttonText;
+                        let isDisabled;
+                        
+                        if (task.status === 'COMPLETED') {
+                            buttonText = 'Completed';
+                            isDisabled = true;
+                        } else if (task.status === 'READY_TO_CLAIM') {
+                            buttonText = 'Claim';
+                            isDisabled = false;
+                        } else { // PENDING
+                            buttonText = 'Go';
+                            isDisabled = false;
+                        }
+
+                        card.innerHTML = `
+                            <span class="task-text-info">${task.name} (${task.reward} SHIB)</span>
+                            <button 
+                                class="task-action-btn-new ${statusClass}"
+                                data-task-id="${task.id}"
+                                data-task-url="${task.url}"
+                                data-task-status="${task.status}"
+                                onclick="handleNewTaskClick(this)"
+                                ${isDisabled ? 'disabled' : ''}
+                            >${buttonText}</button>
+                        `;
+                        container.appendChild(card);
+                    }
+                });
+            }
+        }
+
+        async function handleNewTaskClick(buttonElement) {
+            const taskId = buttonElement.getAttribute('data-task-id');
+            const taskUrl = buttonElement.getAttribute('data-task-url');
+            let taskStatus = buttonElement.getAttribute('data-task-status');
+
+            if (isProcessingTask) return;
+
+            if (taskStatus === 'COMPLETED') {
+                showCustomAlert('Task Completed!', 'Reward already claimed.', 'warning');
+                return;
+            }
+
+            if (taskStatus === 'PENDING') {
+                // Step 1: Redirect to task URL
+                if (typeof Telegram.WebApp.openTelegramLink === 'function') {
+                    Telegram.WebApp.openTelegramLink(taskUrl);
+                } else {
+                    window.open(taskUrl, '_blank');
+                }
+                
+                // Change status to READY_TO_CLAIM locally immediately
+                buttonElement.setAttribute('data-task-status', 'READY_TO_CLAIM');
+                buttonElement.textContent = 'Claim';
+                
+                // Update local appState for this specific task
+                const taskIndex = appState.new_tasks.findIndex(t => t.id.toString() === taskId);
+                if (taskIndex !== -1) {
+                    appState.new_tasks[taskIndex].status = 'READY_TO_CLAIM';
+                }
+                
+            } else if (taskStatus === 'READY_TO_CLAIM') {
+                // Step 2: Claim Reward
+                isProcessingTask = true;
+                buttonElement.textContent = 'Claiming...';
+                buttonElement.disabled = true;
+
+                const actionId = await requestActionId('completeNewTask'); // Assuming a new API type
+
+                if (!actionId) {
+                    isProcessingTask = false;
+                    buttonElement.textContent = 'Claim';
+                    buttonElement.disabled = false;
+                    return;
+                }
+
+                const result = await fetchApi({
+                    type: 'completeNewTask', // New API endpoint
+                    task_id: taskId,
+                    action_id: actionId
+                });
+                
+                isProcessingTask = false;
+
+                if (result.ok) {
+                    const reward = result.data.actual_reward;
+                    // Force a full data reload to get the new balance and task list status from the server
+                    await loadUserData();
+                    
+                    showCustomAlert('Success!', `You received ${reward} SHIB for completing the task!`, 'success');
+                    
+                } else {
+                    // On failure, reload data to get the accurate status from server
+                    await loadUserData();
+                    // Fallback button text
+                    buttonElement.textContent = 'Claim'; 
+                    buttonElement.disabled = false;
+                }
+            }
+        }
+
+
+        /* ===== Withdraw Screen Functions (No changes needed) ===== */
+        function showWithdraw(){
+            if (isBanned) {
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
+            mainScreen.classList.remove('visible');
+            document.getElementById('withdrawScreen').classList.add('visible');
+            loadUserData();
+            displayWithdrawals(); // Call the display function
+        }
+
+        function hideWithdraw(){
+            document.getElementById('withdrawScreen').classList.remove('visible');
+            mainScreen.classList.add('visible');
+        }
+
+        function displayWithdrawals() {
+            const list = document.getElementById('withdrawalHistoryList');
+            list.innerHTML = ''; // Clear existing list
+
+            if (appState.withdrawal_history && appState.withdrawal_history.length > 0) {
+                appState.withdrawal_history.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date desc
+                
+                appState.withdrawal_history.forEach(item => {
+                    const statusClass = item.status.toLowerCase();
+                    const statusText = item.status.charAt(0).toUpperCase() + item.status.slice(1).toLowerCase();
+                    
+                    const li = document.createElement('li');
+                    li.className = 'history-item';
+                    li.innerHTML = `
+                        <div>${item.date}</div>
+                        <div class="history-amount">${item.amount.toLocaleString()} SHIB</div>
+                        <div class="history-status ${statusClass}">${statusText}</div>
+                    `;
+                    list.appendChild(li);
+                });
+            } else {
+                list.innerHTML = '<li class="no-records">No withdrawal records found.</li>';
+            }
+        }
+
+        async function withdraw(){
+            const binanceId = document.getElementById('binanceId').value.trim();
+            const amount = parseInt(document.getElementById('withdrawAmount').value);
+
+            if (!binanceId) {
+                showCustomAlert('Input Error!', 'Please enter your Binance Pay ID or Wallet Address.', 'error');
+                return;
+            }
+            if (isNaN(amount) || amount < MIN_WITHDRAW) {
+                showCustomAlert('Input Error!', `Minimum withdrawal amount is ${MIN_WITHDRAW.toLocaleString()} SHIB.`, 'error');
+                return;
+            }
+            if (amount > appState.balance) {
+                showCustomAlert('Balance Error!', `Requested amount exceeds your current balance of ${appState.balance.toLocaleString()} SHIB.`, 'error');
+                return;
+            }
+            
+            // 1. Request Action ID from the Server 
+            const actionId = await requestActionId('withdraw');
+            if (!actionId) return;
+
+            // 2. Send withdrawal request via API
+            const result = await fetchApi({
+                type: 'withdraw',
+                binanceId: binanceId,
+                amount: amount,
+                action_id: actionId // ⬅️ إرسال Action ID
+            });
+
+            if (result.ok) {
+                // 3. Update balance with trusted server value
+                updateState({ balance: result.data.new_balance });
+                
+                // 4. Reload withdrawal history with new data
+                await loadUserData(); 
+                displayWithdrawals(); 
+                
+                // English translation of the Arabic alert message
+                showCustomAlert('Request Sent!', `Details:\nBinance ID: ${binanceId}\nAmount: ${amount.toLocaleString()} SHIB\n\nThe transfer will be processed within 24 hours.`, 'success');
+            }
+        }
+
+
+        /* ===== Invite Screen Functions (No changes needed) ===== */
+        function showInvite(){
+            if (isBanned) {
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
+            mainScreen.classList.remove('visible');
+            document.getElementById('inviteScreen').classList.add('visible');
+            loadUserData();
+            generateReferralLink();
+        }
+
+        function hideInvite(){
+            document.getElementById('inviteScreen').classList.remove('visible');
+            mainScreen.classList.add('visible');
+        }
+
+        function generateReferralLink() {
+            if (!tgUser) return;
+            const botUsername = 'SHIBAdBot'; // Replace with your bot's username
+            const link = `https://t.me/${botUsername}?start=ref_${tgUser.id}`;
+            document.getElementById('referralLinkInput').value = link;
+        }
+
+        function copyReferralLink() {
+            const linkInput = document.getElementById('referralLinkInput');
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999); // For mobile devices
+            
+            navigator.clipboard.writeText(linkInput.value).then(() => {
+                // English translation of the Arabic alert message
+                showCustomAlert('Copied!', 'Your referral link has been copied to the clipboard.', 'success');
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+                // English translation of the Arabic alert message
+                showCustomAlert('Copy Failed!', 'Failed to copy the link. Please try again.', 'error');
+            });
+        }
+
+
+        /* ===== Spin Wheel (Wheel Code) (No changes needed) ===== */
+        const colors = ['#00bfff', '#ff8c00', '#28a745', '#ff4500', '#00f2fe'];
+        const prizeValues = sectors;
+        const canvas = document.getElementById('wheelCanvas');
+        const ctx = canvas.getContext('2d');
+        const spinResult = document.getElementById('spinResult');
+        const spinBtn = document.getElementById('spinBtn');
+        let spinning = false;
+        let currentAngle = 0;
         
+        function drawWheel() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 130;
+            const sectorCount = sectors.length;
+            const arc = 2 * Math.PI / sectorCount;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = '24px Vazirmatn, sans-serif'; 
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+
+            sectors.forEach((value, i) => {
+                const angle = currentAngle + i * arc;
+                
+                // Draw sector
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, angle, angle + arc);
+                ctx.lineTo(centerX, centerY);
+                ctx.fillStyle = colors[i % colors.length];
+                ctx.fill();
+                
+                // Draw text (Prize Value)
+                ctx.save();
+                ctx.translate(centerX, centerY);
+                const textAngle = angle + arc / 2;
+                ctx.rotate(textAngle);
+                ctx.fillStyle = '#fff';
+                ctx.shadowColor = 'rgba(0,0,0,0.5)';
+                ctx.shadowBlur = 4;
+                // Move text to position (radius * 0.7)
+                ctx.fillText(value.toString(), radius * 0.7, 0); 
+                ctx.restore();
+
+                // Draw outlines
+                ctx.strokeStyle = '#333';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            });
+            
+            // Draw center circle (Hub)
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 15, 0, 2 * Math.PI);
+            ctx.fillStyle = '#ff3366';
+            ctx.shadowColor = 'rgba(0,0,0,0.5)';
+            ctx.shadowBlur = 8;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+            
+            // Draw border
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.strokeStyle = '#eee';
+            ctx.lineWidth = 10;
+            ctx.stroke();
+        }
+
+        function animateWheel(startAngle, endAngle, duration, prizeIndex, prize) {
+            const startTime = performance.now();
+            let animationFrameId;
+
+            const animate = (time) => {
+                const elapsed = time - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Use ease-out (cubic function) for smoother deceleration
+                const easedProgress = 1 - Math.pow(1 - progress, 3);
+                
+                currentAngle = startAngle + (endAngle - startAngle) * easedProgress;
+                
+                drawWheel();
+
+                if (progress < 1) {
+                    animationFrameId = requestAnimationFrame(animate);
+                } else {
+                    spinning = false;
+                    isSpinning = false;
+                    spinBtn.disabled = false;
+                    
+                    // Display result
+                    const resultText = `🎉 You won ${prize} SHIB!`;
+                    spinResult.textContent = resultText;
+                    showCustomAlert('Spin Result', resultText, 'success');
+                    
+                    updateUI(); // Update UI to reflect new spin count/limit
+                }
+            };
+            
+            animationFrameId = requestAnimationFrame(animate);
+        }
+
+        async function spinWheel() {
+            if (isBanned) {
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
+            if (appState.spins_today >= DAILY_MAX_SPINS) {
+                return;
+            }
+
+            // 1. Request Action ID from the Server for pre-spin (security check)
+            const preSpinActionId = await requestActionId('preSpin');
+            if (!preSpinActionId) return; // Error message already shown by fetchApi
+
+            // 2. Request pre-spin registration (Server checks for banned user and consumes the action ID)
+            const preSpinReqResult = await fetchApi({ 
+                type: 'preSpin', 
+                action_id: preSpinActionId // ⬅️ Send Action ID
+            });
+            
+            if (!preSpinReqResult.ok) {
+                await loadUserData();
+                return;
+            }
+
+            // 3. Request Action ID from the Server for the spin result (prize confirmation)
+            const spinResultActionId = await requestActionId('spinResult');
+            if (!spinResultActionId) {
+                // English translation of the Arabic alert message
+                showCustomAlert('Security Error!', 'Failed to get confirmation token. Please try again.', 'error');
+                await loadUserData();
+                return;
+            }
+            
+            // 4. Call Ad SDK (libtl.com)
+            show_10245709()
+            .then(async () => {
+                isSpinning = true; // Use separate flag for button control
+                spinning = true;
+                spinBtn.disabled = true;
+                spinResult.textContent = 'Spinning...';
+
+                // 5. Request spin result and prize addition (Server runs limits, Rate Limit, and validates Action ID)
+                const spinResultRes = await fetchApi({
+                    type: 'spinResult',
+                    action_id: spinResultActionId // ⬅️ Send Action ID
+                });
+
+                if (spinResultRes.ok) {
+                    const prizeIndex = spinResultRes.data.prize_index;
+                    const prize = spinResultRes.data.prize;
+                    
+                    // 6. Calculate target angle
+                    const sectorCount = sectors.length;
+                    const arc = 2 * Math.PI / sectorCount;
+                    
+                    // Calculate the angle required to point the arrow at the center of the winning sector
+                    // The wheel rotates counter-clockwise. Index 0 is at 3 o'clock.
+                    // Arrow points at 12 o'clock, so we need to offset by PI/2.
+                    // Target angle for the prize (center of sector)
+                    let targetAngleForIndex = prizeIndex * arc + arc / 2;
+                    
+                    // The arrow is at the top (PI/2). We want the target angle to be there.
+                    // The winning segment should stop at PI/2 (90 degrees or 1.57 radians).
+                    let targetStopAngle = (2 * Math.PI) - targetAngleForIndex + Math.PI / 2; 
+
+                    // Ensure the wheel spins at least 3 full rotations
+                    const fullRotations = 5;
+                    const totalRotation = 2 * Math.PI * fullRotations + targetStopAngle;
+                    
+                    // The initial start angle (currentAngle) is irrelevant as it's an absolute rotation
+                    // We need to define the absolute rotation to hit the target.
+                    // Set a very large starting angle to ensure smooth animation starts
+                    const startAngle = currentAngle + 0; 
+                    const endAngle = totalRotation;
+                    const duration = 5000; // 5 seconds spin time
+                    
+                    updateState({ balance: spinResultRes.data.new_balance, spins_today: spinResultRes.data.new_spins_count });
+
+                    // 7. Animate the wheel
+                    animateWheel(startAngle, endAngle, duration, prizeIndex, prize);
+
+                } else {
+                    // Spin result processing failed on server (e.g., limit exceeded after preSpin)
+                    spinning = false;
+                    isSpinning = false;
+                    spinBtn.disabled = false;
+                    spinResult.textContent = 'Failed to get prize.';
+                    await loadUserData(); // Reload data to show updated spin limit/count
+                }
+
+            })
+            .catch(async (e) => {
+                // Ad error/cancellation handling
+                if (typeof e === 'string' && e.includes('canceled')) {
+                    // English translation of the Arabic alert message
+                    showCustomAlert('Ad Cancelled/Failed!', 'The ad was not watched completely. The attempt was not counted.', 'warning');
+                } else {
+                     // English translation of the Arabic alert message
+                    showCustomAlert('Ad Load Failed!', 'Ad failed to load. The attempt was not counted. Please try again.', 'error');
+                }
+                await loadUserData();
+            });
+        }
+
+
+        /* ===== Navigation Functions (No changes needed) ===== */
+        function showSpin(){
+            if (isBanned) {
+                showCustomAlert('Access Denied!', 'This account has been banned.', 'error');
+                return;
+            }
+            mainScreen.classList.remove('visible');
+            document.getElementById('spinScreen').classList.add('visible');
+            loadUserData();
+            drawWheel();
+            updateUI();
+        }
+
+        function hideSpin(){
+            document.getElementById('spinScreen').classList.remove('visible');
+            mainScreen.classList.add('visible');
+        }
+
+
+        /* ===== CRITICAL FIX: APP Initialization and Loader Handling ===== */
+        async function registerOrLoadUser() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            const mainScreen = document.getElementById('mainScreen');
+
+            if (!tgUser) {
+                // Fallback for testing outside Telegram
+                console.error("Telegram user data not available. Loading test mode.");
+                loadingScreen.classList.add('hidden');
+                mainScreen.classList.add('visible');
+                showCustomAlert('Error!', 'This app must be run inside Telegram Mini App.', 'error');
+                return;
+            }
+
+            const userId = tgUser.id;
+            const referrerId = getRefParam();
+            
+            try {
+                // 1. Try to load user data (which also checks for existence)
+                let result = await fetchApi({ type: 'getUserData', user_id: userId });
+
+                if (!result.ok && result.error.includes('User not found')) {
+                    // 2. User not found, attempt registration
+                    const regResult = await fetchApi({ type: 'register', user_id: userId, ref_by: referrerId });
+                    if (regResult.ok) {
+                        // Successfully registered, load data
+                        await loadUserData();
+                    } else {
+                        // Registration failed
+                        showCustomAlert('Registration Failed!', 'Could not register new user.', 'error');
+                    }
+                } else if (result.ok) {
+                    // User exists and data loaded successfully
+                    // loadUserData was called inside fetchApi success or should be called now
+                    await loadUserData();
+                }
+                
+            } catch (error) {
+                console.error("App initialization failed completely:", error.message);
+                showCustomAlert('App Error', 'Failed to initialize the application.', 'error');
+            } finally {
+                // 3. CRITICAL FIX: Ensure the loading screen is hidden and the main screen is shown
+                loadingScreen.classList.add('hidden');
+                mainScreen.classList.add('visible');
+            }
+        }
+
+        // Final execution block
+        if (tgUser) {
+            registerOrLoadUser();
+        } else {
+            // Fallback for non-Telegram environment
+            document.getElementById('loadingScreen').classList.add('hidden');
+            document.getElementById('mainScreen').classList.add('visible');
+            showCustomAlert('Error!', 'This app must be run inside Telegram Mini App.', 'error');
+        }
+
         // Final event listener to ensure background audio starts on the first user interaction
         document.addEventListener('click', function handler() {
             playBGAudio();
             document.removeEventListener('click', handler); // Remove after first successful click
         });
-        
-        // Run Initialization
-        init();
     </script>
 </body>
 </html>
